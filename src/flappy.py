@@ -542,7 +542,7 @@ def showPerformance():
     plt.title("Score distribution")
     plt.xlabel("Episode")
     plt.ylabel("Score")
-    plt.show()
+    #plt.show()
 
 def showGameOverScreen(crashInfo):
 

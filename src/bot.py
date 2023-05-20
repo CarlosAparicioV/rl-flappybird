@@ -110,6 +110,37 @@ class Bot(object):
             act = exp[1]
             new_state = exp[2]
 
+            # In this part of the code we store the values of the changes in Q
+            # of 5 states previously selected
+            # if self.qvalues[state][2] != 0 and state == "0_50_-8_0":
+            #     f = open("0_50_-8_0.csv", "a")
+            #     f.write(str(self.qvalues[state][0])+','+str(self.qvalues[state][1])+','+str(self.qvalues[state][2])+'\n')
+            #     f.close()
+                
+            # elif self.qvalues[state][2] != 0 and state == "0_60_-7_0":
+            #     f = open("0_60_-7_0.csv", "a")
+            #     f.write(str(self.qvalues[state][0])+','+str(self.qvalues[state][1])+','+str(self.qvalues[state][2])+'\n')
+            #     f.close()
+            
+            # elif self.qvalues[state][2] != 0 and state == "0_40_-9_0":
+            #     f = open("0_40_-9_0.csv", "a")
+            #     f.write(str(self.qvalues[state][0])+','+str(self.qvalues[state][1])+','+str(self.qvalues[state][2])+'\n')
+            #     f.close()
+            
+            # elif self.qvalues[state][2] != 0 and state == "10_40_-9_0":
+            #     f = open("10_40_-9_0.csv", "a")
+            #     f.write(str(self.qvalues[state][0])+','+str(self.qvalues[state][1])+','+str(self.qvalues[state][2])+'\n')
+            #     f.close()
+                
+            # elif self.qvalues[state][2] != 0 and state == "60_30_10_0":
+            #     f = open("60_30_10_0.csv", "a")
+            #     f.write(str(self.qvalues[state][0])+','+str(self.qvalues[state][1])+','+str(self.qvalues[state][2])+'\n')
+            #     f.close()
+                
+            # End of the changes
+            
+
+                
             self.qvalues[state][2] += 1
 
             # Select reward
@@ -190,3 +221,22 @@ class Bot(object):
             json.dump(self.qvalues, fil)
             fil.close()
             print("******** Q-table(%d keys) updated on local file ********" % len(self.qvalues.keys()))
+            #self.gameCNT%10==0 or 
+            if self.gameCNT==10:
+               
+                #print("OH SI ",self.gameCNT)
+                try:
+                    fil = open("data/qvalues.json", "r")
+                except IOError:
+                    print("EEEEEEEEEEEEEEEERRRRRRRRRRRRRRROOOOOOOORRRRRRRRRRRR")
+                    return
+                
+                jsonLoaded = json.load(fil)
+                length = len(jsonLoaded)
+                fil.close()
+                
+                f = open("lenQTable.csv", "a")
+                f.write(str(self.gameCNT)+','+str(length)+'\n')
+                f.close()
+                
+            
